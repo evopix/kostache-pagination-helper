@@ -13,27 +13,28 @@ class Kohana_Kostache_Pagination extends Pagination
 	/**
 	 * Creates a new Pagination object.
 	 *
-	 * @param   array  configuration
+	 * @param   array    $config   configuration
+	 * @param   Request  $request  request instance
 	 * @return  Kostache_Pagination
 	 */
-	public static function factory(array $config = array())
+	public static function factory(array $config = array(), Request $request = NULL)
 	{
-		return new Kostache_Pagination($config);
+		return new Kostache_Pagination($config, $request);
 	}
 
 	/**
 	 * Creates a new Pagination object.
 	 *
-	 * @param   array  configuration
-	 * @return  void
+	 * @param   array    $config   configuration
+	 * @param   Request  $request  request instance
 	 */
-	public function __construct(array $config = array())
+	public function __construct(array $config = array(), Request $request = NULL)
 	{
 		$this->config += array(
 			'kostache' => NULL,
 			'partial' => NULL,
 		);
-		parent::__construct($config);
+		parent::__construct($config, $request);
 		// If view, partial name and Kostache instance are set, add pagination partial
 		if ($this->config['kostache'] instanceof Kostache AND $this->config['partial'] AND $this->config['view'])
 		{
